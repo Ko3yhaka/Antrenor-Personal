@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nichifor Mihai Alexandru | Antrenor Personal</title>
+  <style>
+    /* Reset & font */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR FIXED */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #111;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      z-index: 10000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav a:hover, nav a.active {
+      background-color: #e63946;
+      color: white;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('poza-mihai.jpg') no-repeat center center/cover;
+      height: 100vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(230,57,70,0.7);
+      animation: fadeInDown 1s ease forwards;
+      scroll-margin-top: 70px;
+    }
+    .hero h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #e63946;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      transition: background 0.3s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn:hover {
+      background: #d62839;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* SECTIONS GENERAL */
+    section {
+      max-width: 900px;
+      margin: 80px auto 60px;
+      padding: 0 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      scroll-margin-top: 70px;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* TESTIMONIALE */
+    #testimonials h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #e63946;
+    }
+    .testimonial-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .testimonial-item {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-style: italic;
+      color: #555;
+      position: relative;
+    }
+    .testimonial-item::before {
+      content: "“";
+      font-size: 50px;
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      color: #e63946;
+      font-weight: bold;
+      font-family: serif;
+    }
+    .testimonial-author {
+      margin-top: 12px;
+      font-weight: 700;
+      text-align: right;
+      color: #222;
+      font-style: normal;
+    }
+
+    /* FAQ */
+    #faq h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #e63946;
+    }
+    .faq-item {
+      background: #f8f8f8;
+      margin: 15px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px 25px;
+      transition: background 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-item.active {
+      background: #e63946;
+      color: white;
+      box-shadow: 0 6px 14px rgba(230,57,70,0.6);
+    }
+    .faq-question {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .faq-answer {
+      font-size: 16px;
+      margin-top: 10px;
+      line-height: 1.4;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    /* CALENDAR / PROGRAMARI */
+    #booking h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 32px;
+      color: #e63946;
+    }
+    #booking p {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 16px;
+      color: #444;
+    }
+    #booking input[type="date"] {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline-color: #e63946;
+      cursor: pointer;
+      user-select: none;
+    }
+    #reserveBtn {
+      display: block;
+      margin: 0 auto;
+      background-color: #e63946;
+      color: white;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+      user-select: none;
+    }
+    #reserveBtn:hover {
+      background-color: #d62839;
+    }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed;
+      bottom: 40px;
+      right: 30px;
+      background: #e63946;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      font-weight: bold;
+      z-index: 1000;
+      user-select: none;
+    }
+    #backToTop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* NEWSLETTER */
+    #newsletter {
+      background: #f1f1f1;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 60px auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    #newsletter h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #e63946;
+    }
+    #newsletter form input[type="email"] {
+      padding: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline-color: #e63946;
+    }
+    #newsletter form button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      background: #e63946;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      user-select: none;
+    }
+    #newsletter form button:hover {
+      background: #d62839;
+    }
+    #newsletterMessage {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #2b7a0b;
+      font-weight: 600;
+    }
+
+    /* GALERIE FOTO */
+    #gallery {
+      text-align: center;
+      padding-bottom: 60px;
+    }
+    #gallery h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #e63946;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 15px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      user-select: none;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(230,57,70,0.7);
+    }
+
+    /* CHATBOT */
+    #chatToggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(230,57,70,0.7);
+      z-index: 1000;
+      user-select: none;
+    }
+    #chatBox {
+      position: fixed;
+      bottom: 70px;
+      left: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      font-family: Arial, sans-serif;
+    }
+    #chatBox > div:first-child {
+      background: #e63946;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+    #chatMessages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    #chatInput {
+      border: none;
+      border-top: 1px solid #ddd;
+      padding: 10px;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .chat-message-user {
+      text-align: right;
+      margin: 5px 0;
+      background: #e63946;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    .chat-message-bot {
+      text-align: left;
+      margin: 5px 0;
+      background: #f1f1f1;
+      color: #333;
+      padding: 6px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    /* DARK MODE */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark-mode nav {
+      background-color: #1f1f1f;
+    }
+    body.dark-mode footer {
+      background-color: #222;
+      color: #aaa;
+    }
+    body.dark-mode .hero {
+      text-shadow: 2px 2px 8px #000;
+    }
+    body.dark-mode .btn {
+      background-color: #bb2649;
+      color: #f0f0f0;
+    }
+    body.dark-mode .btn:hover {
+      background-color: #9e2041;
+    }
+    body.dark-mode .faq-question {
+      background-color: #333;
+      color: #ddd;
+    }
+    body.dark-mode .faq-answer {
+      background-color: #222;
+      color: #ccc;
+    }
+    body.dark-mode #backToTop {
+      background-color: #bb2649;
+    }
+    body.dark-mode #newsletter {
+      background-color: #222;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    }
+    body.dark-mode #newsletter form input[type="email"] {
+      background-color: #121212;
+      color: #e0e0e0;
+      border: 1px solid #444;
+    }
+    body.dark-mode #newsletter form button {
+      background-color: #bb2649;
+      color: #eee;
+    }
+    body.dark-mode #gallery img:hover {
+      box-shadow: 0 4px 15px rgba(187,38,73,0.7);
+    }
+    body.dark-mode #chatBox {
+      background-color: #222;
+      color: #eee;
+    }
+    body.dark-mode #chatBox > div:first-child {
+      background-color: #bb2649;
+    }
+    body.dark-mode .chat-message-bot {
+      background-color: #333;
+      color: #ccc;
+    }
+
+    /* TOGGLE DARK MODE BUTTON */
+    #darkModeToggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 11000;
+      font-weight: bold;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(230,57,70,0.7);
+      transition: background 0.3s;
+    }
+    #darkModeToggle:hover {
+      background: #d62839;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="active">Acasă</a>
+    <a href="#testimonials">Testimoniale</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking">Rezervări</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#gallery">Galerie</a>
+  </nav>
+
+  <button id="darkModeToggle" aria-label="Comută modul întunecat">Dark Mode</button>
+
+  <section id="hero" class="hero visible" tabindex="0">
+    <h1>Nichifor Mihai Alexandru</h1>
+    <p>Antrenor Personal | Nutriție | Suport Motivațional</p>
+    <a href="#booking" class="btn">Rezervă o sesiune</a>
+  </section>
+
+  <section id="testimonials" tabindex="0">
+    <h2>Ce spun clienții mei</h2>
+    <div class="testimonial-list">
+      <div class="testimonial-item">
+        <p>„Mihai m-a ajutat să ajung în cea mai bună formă a vieții mele. Recomand cu drag!”</p>
+        <div class="testimonial-author">- Andreea M.</div>
+      </div>
+      <div class="testimonial-item">
+        <p>„Profesionalism, răbdare și rezultate vizibile în doar câteva săptămâni.”</p>
+        <div class="testimonial-author">- Radu P.</div>
+      </div>
+      <div class="testimonial-item">
+        <p>„Datorită lui Mihai, am învățat să mănânc corect și să mă antrenez eficient.”</p>
+        <div class="testimonial-author">- Ioana V.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" tabindex="0">
+    <h2>Întrebări frecvente</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">Ce tipuri de antrenamente oferi?</div>
+      <div class="faq-answer">Ofer antrenamente personalizate pentru forță, cardio, flexibilitate și nutriție adaptată nevoilor tale.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Cum pot rezerva o sesiune?</div>
+      <div class="faq-answer">Folosește secțiunea de rezervări pentru a alege data și ora care ți se potrivesc.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Oferi consultanță nutrițională?</div>
+      <div class="faq-answer">Da, am pachete speciale pentru nutriție și planuri alimentare personalizate.</div>
+    </div>
+
+  </section>
+
+  <section id="booking" tabindex="0">
+    <h2>Rezervă o sesiune</h2>
+    <p>Alege data dorită pentru antrenament:</p>
+    <input type="date" id="bookingDate" min="" aria-label="Alege data rezervării" />
+    <button id="reserveBtn" aria-label="Rezervă sesiunea">Rezervă</button>
+  </section>
+
+  <section id="newsletter" tabindex="0">
+    <h2>Abonează-te la newsletter</h2>
+    <form id="newsletterForm" aria-label="Formular abonare newsletter">
+      <input type="email" id="emailInput" placeholder="Adresa ta de email" required aria-required="true" aria-describedby="newsletterMessage" />
+      <button type="submit" class="btn">Abonează-te</button>
+    </form>
+    <p id="newsletterMessage" role="alert" aria-live="polite"></p>
+  </section>
+
+  <section id="gallery" tabindex="0">
+    <h2>Rezultate clienți</h2>
+    <div class="gallery-grid" aria-label="Rezultate clienți">
+      <img src="clientă.jpg" alt="Rezultat 1" />
+      <img src="client.jpg" alt="Rezultat 2" />
+      <img src="clientt.jpg" alt="Rezultat 3" />
+    </div>
+  </section>
+
+  <button id="backToTop" aria-label="Înapoi sus">↑ Sus</button>
+
+  <button id="chatToggle" aria-label="Deschide chat">Chat</button>
+  <div id="chatBox" role="region" aria-live="polite" aria-label="Chat cu Mihai">
+    <div>Chat cu Mihai</div>
+    <div id="chatMessages"></div>
+    <input type="text" id="chatInput" placeholder="Scrie un mesaj..." aria-label="Introdu mesaj chat" autocomplete="off" />
+  </div>
+
+  <script>
+    // NAV ACTIVE LINK UPDATE
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
+
+    function onScroll() {
+      const scrollPos = window.scrollY + 80;
+      sections.forEach((sec, idx) => {
+        if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          if (navLinks[idx]) navLinks[idx].classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+
+    // SECTIONS APPEAR ON SCROLL
+    const scrollSections = document.querySelectorAll('section:not(.hero)');
+    function revealOnScroll() {
+      scrollSections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+    // FAQ TOGGLE
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const currentlyActive = document.querySelector('.faq-item.active');
+        if (currentlyActive && currentlyActive !== item) {
+          currentlyActive.classList.remove('active');
+          currentlyActive.querySelector('.faq-answer').style.maxHeight = null;
+        }
+        item.classList.toggle('active');
+        const answer = item.querySelector('.faq-answer');
+        if (item.classList.contains('active')) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          answer.style.maxHeight = null;
+        }
+      });
+    });
+
+    // BOOKING - SET MIN DATE TO TODAY
+    const bookingDate = document.getElementById('bookingDate');
+    const today = new Date().toISOString().split('T')[0];
+    bookingDate.min = today;
+
+    // BOOKING BUTTON CLICK
+    const reserveBtn = document.getElementById('reserveBtn');
+    reserveBtn.addEventListener('click', () => {
+      if (!bookingDate.value) {
+        alert('Te rog să alegi o dată pentru rezervare!');
+        return;
+      }
+      alert(`Sesiunea ta a fost rezervată pentru data de ${bookingDate.value}. Mulțumim!`);
+      bookingDate.value = '';
+    });
+
+    // BACK TO TOP BUTTON
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // NEWSLETTER SUBMIT
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterMessage = document.getElementById('newsletterMessage');
+    newsletterForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      if (email) {
+        newsletterMessage.textContent = 'Mulțumim pentru abonare!';
+        newsletterForm.reset();
+        setTimeout(() => {
+          newsletterMessage.textContent = '';
+        }, 4000);
+      }
+    });
+
+    // CHATBOT TOGGLE
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+
+    chatToggle.addEventListener('click', () => {
+      if (chatBox.style.display === 'flex') {
+        chatBox.style.display = 'none';
+      } else {
+        chatBox.style.display = 'flex';
+        chatInput.focus();
+      }
+    });
+
+    function appendMessage(text, fromUser) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      div.className = fromUser ? 'chat-message-user' : 'chat-message-bot';
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Simplu chatbot demo - răspunsuri fixe
+    chatInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && chatInput.value.trim()) {
+        const userMsg = chatInput.value.trim();
+        appendMessage(userMsg, true);
+        chatInput.value = '';
+
+        setTimeout(() => {
+          let botReply = "Îmi pare rău, nu pot răspunde acum. Te voi contacta cât de curând!";
+          const userLC = userMsg.toLowerCase();
+          if (userLC.includes('program')) {
+            botReply = "Programul meu este luni-vineri, 07:00 - 21:00.";
+          } else if (userLC.includes('preț')) {
+            botReply = "Pentru detalii despre prețuri, te rog să mă contactezi direct.";
+          } else if (userLC.includes('nutriție')) {
+            botReply = "Ofer planuri personalizate de nutriție. Hai să discutăm!";
+          }
+          appendMessage(botReply, false);
+        }, 800);
+      }
+    });
+
+    // DARK MODE TOGGLE
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if(document.body.classList.contains('dark-mode')){
+        darkModeToggle.textContent = "Light Mode";
+      } else {
+        darkModeToggle.textContent = "Dark Mode";
+      }
+    });
+
+  </script>
+
+</body>
+</html>
